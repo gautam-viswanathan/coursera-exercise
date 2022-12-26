@@ -1,2 +1,0 @@
-# coursera-exercise
-exercise
