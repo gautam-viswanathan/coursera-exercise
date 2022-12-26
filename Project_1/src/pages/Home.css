@@ -1,0 +1,21 @@
+.trans-item {
+  --background: transparent;
+  --color: white;
+}
+
+.button-inner {
+  justify-content: start !important;
+}
+.fineIcon {
+  vertical-align: sub;
+  padding-right: 10px;
+}
+.menu {
+  align-content: flex-start;
+}
+.background {
+  position: absolute;
+  object-fit: cover;
+  height: 100vh;
+  width: 100vw;
+}
