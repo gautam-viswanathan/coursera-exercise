@@ -19,3 +19,34 @@
   height: 100vh;
   width: 100vw;
 }
+ion-item.home-card {
+  align-items: baseline;
+}
+.grid-container {
+  display: grid;
+}
+.content {
+  display: flex;
+  text-align: bottom;
+}
+.card {
+  --background: transparent;
+  justify-content: center;
+  text-align: center;
+  height: 300px;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 50px;
+}
+.card-content {
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.label {
+  justify-content: center;
+}

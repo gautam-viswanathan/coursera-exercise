@@ -13,33 +13,38 @@ import {
   IonRouterOutlet,
   IonItem,
   IonImg,
+  IonTabs,
+  IonTabBar,
+  IonBadge,
+  IonLabel,
+  IonTabButton,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonInput,
 } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
 import { Redirect, Route } from "react-router-dom";
-import { person, card, cash } from "ionicons/icons";
+import { personCircle, calendar, person, card, cash, map, informationCircle } from "ionicons/icons";
 import "./Home.css";
 import Menu from "../components/Menu";
 import Profile from "./Profile";
+import Navbar from "../components/Navbar";
 
 const Home: React.FC = () => {
   return (
     <>
       <Menu />
-      <IonPage id="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonMenuButton></IonMenuButton>
-            </IonButtons>
-            <IonTitle>
-              <IonIcon icon={cash} className="fineIcon" />
-              Fine way
-            </IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonImg className="background" src="assets/shapes.svg" />
-        <IonContent className="trans-item">Tap the button in the toolbar to open the menu.</IonContent>
-      </IonPage>
+      <IonContent>
+        <IonCard className="card">
+          <IonContent className="card-content">
+            <IonLabel className="" position="floating">
+              Enter Name
+            </IonLabel>
+            <IonInput placeholder="Enter name" />
+          </IonContent>
+        </IonCard>
+      </IonContent>
     </>
   );
 };
