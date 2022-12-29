@@ -38,7 +38,7 @@ const Menu: React.FC = () => {
             <IonTitle className="menu-label">
               <IonItem routerLink="/home">
                 <IonIcon icon={trailSignSharp} />
-                <IonLabel className="menu-label">Fine Way</IonLabel>
+                <IonLabel className="padding-icon-menu">Fine Way</IonLabel>
               </IonItem>
             </IonTitle>
           </IonToolbar>
