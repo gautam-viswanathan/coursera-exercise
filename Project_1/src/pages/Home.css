@@ -64,3 +64,7 @@ ion-item.home-card {
 .list-style {
   align-items: flex-end;
 }
+
+.space-bottom {
+  padding-bottom: 25px;
+}
