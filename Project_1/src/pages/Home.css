@@ -68,3 +68,12 @@ ion-item.home-card {
 .space-bottom {
   padding-bottom: 25px;
 }
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+.material-symbols-outlined {
+  font-size: small;
+}
