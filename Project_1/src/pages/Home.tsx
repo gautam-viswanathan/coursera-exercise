@@ -1,13 +1,7 @@
 import {
   IonRippleEffect,
-  IonToolbar,
   IonButton,
-  IonButtons,
-  IonTitle,
-  IonInput,
   IonItem,
-  IonHeader,
-  IonModal,
   IonContent,
   IonCard,
   IonIcon,
@@ -19,18 +13,29 @@ import {
   IonList,
   IonThumbnail,
   ScrollDetail,
+  IonAccordionGroup,
+  IonAccordion,
+  useIonToast,
 } from "@ionic/react";
-import React, { useEffect, useRef } from "react";
-import { chevronUpCircle, document, colorPalette, globe, add, push, list } from "ionicons/icons";
+import React, { useEffect } from "react";
+import { add } from "ionicons/icons";
 import "./Home.css";
 import Menu from "../components/Menu";
 import { useState } from "react";
-import { InputChangeEventDetail, OverlayEventDetail } from "@ionic/core/components";
 import Modal from "../components/Modal";
 
 const Home: React.FC = () => {
   const [UseVariable, setUseVariable] = useState({ all_items: [] });
   const [message, setMessage] = useState("Track your expenses with a simple click");
+  const [present] = useIonToast();
+
+  function presentToast() {
+    present({
+      message: "Really? no Date? Lazy!!",
+      duration: 1500,
+    });
+  }
+
   const update = (filter: any) => {
     setUseVariable(filter);
   };
@@ -74,8 +79,8 @@ const Home: React.FC = () => {
             </IonFab>
             <IonCardContent className="card-content">
               <p>{message}</p>
-              <Modal UseVariable={update} image={""} text={""} price={0} currency={""} currencyValue={""} />
-              <IonList color="dark">
+              <Modal UseVariable={update} image={""} text={""} price={0} currency={""} comments={""} date={new Date()} />
+              <IonList>
                 {Object.keys(UseVariable).length !== 0 ? (
                   UseVariable.all_items.map((item) => {
                     return (
@@ -83,7 +88,11 @@ const Home: React.FC = () => {
                         <IonThumbnail slot="start">
                           <img alt="Silhouette of mountains" src={item["image"]} />
                         </IonThumbnail>
-                        <p>{item["text"]}</p>
+                        <div>
+                          <p>{item["text"]}</p>
+                          <p> comments:{item["comments"]}</p>
+                          <p></p>
+                        </div>
                         <p slot="end">
                           <span className="material-symbols-outlined">{[item["currency"]]}</span>
                           <span>{item["price"]}</span>
@@ -95,6 +104,8 @@ const Home: React.FC = () => {
                 ) : (
                   <p>Nothing as of now</p>
                 )}
+
+                <IonButton slot="start">Delete</IonButton>
               </IonList>
             </IonCardContent>
           </IonCard>

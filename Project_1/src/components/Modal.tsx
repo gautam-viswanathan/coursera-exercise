@@ -11,27 +11,28 @@ import {
   IonInput,
   IonSelect,
   IonSelectOption,
-  IonIcon,
 } from "@ionic/react";
-import { add } from "ionicons/icons";
-import React, { useEffect, useRef, useState } from "react";
-import { InputChangeEventDetail, OverlayEventDetail } from "@ionic/core/components";
+import { calendar } from "ionicons/icons";
+import React, { useRef, useState } from "react";
+import { OverlayEventDetail } from "@ionic/core/components";
 interface Item {
   image: string;
   text: string;
   UseVariable: any;
   price: number;
   currency: string;
-  currencyValue: string;
+  comments: string;
+  date: Date;
 }
 
 const Modal: React.FC<Item> = ({ UseVariable }) => {
   const modal = useRef<HTMLIonModalElement>(null);
+  const [all_items] = useState<Item[]>([]);
   const [finance, setFinance] = useState("");
   const [expenditure, setExpenditure] = useState(0);
-  const [all_items] = useState<Item[]>([]);
   const [currency, setCurrency] = useState("");
-  const [currencyValue, setCurrencyValue] = useState("");
+  const [comments, setComments] = useState("");
+  const [date, useDate] = useState(new Date());
 
   function confirm() {
     modal.current?.dismiss([], "confirm");
@@ -44,16 +45,21 @@ const Modal: React.FC<Item> = ({ UseVariable }) => {
         text: finance,
         price: expenditure,
         currency: currency,
-        currencyValue: currencyValue,
+        comments: comments,
+        date: date,
         UseVariable,
       });
+      setFinance("");
+      setExpenditure(0);
+      setCurrency("");
+
       UseVariable({ all_items });
     }
   }
 
   return (
     <>
-      <IonModal ref={modal} trigger="open-modal" color="" onWillDismiss={(event) => expense(event)}>
+      <IonModal ref={modal} trigger="open-modal" onWillDismiss={(event) => expense(event)}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
@@ -61,7 +67,11 @@ const Modal: React.FC<Item> = ({ UseVariable }) => {
             </IonButtons>
             <IonTitle>Enter your expenses</IonTitle>
             <IonButtons slot="end">
-              <IonButton strong={true} onClick={() => confirm()}>
+              <IonButton
+                strong={true}
+                disabled={finance.trim() !== "" && currency.trim() !== "" && expenditure !== 0 ? false : true}
+                onClick={() => confirm()}
+              >
                 Confirm
               </IonButton>
             </IonButtons>
@@ -98,6 +108,17 @@ const Modal: React.FC<Item> = ({ UseVariable }) => {
               type="number"
               placeholder="Price Paid"
             />
+          </IonItem>
+          <IonItem>
+            <IonLabel>Comments:</IonLabel>
+            <IonInput
+              onIonChange={(e: any) => {
+                setComments(e.target.value);
+              }}
+            />
+          </IonItem>
+          <IonItem>
+            <IonInput type="date" placeholder="Enter Date"></IonInput>
           </IonItem>
         </IonContent>
       </IonModal>
